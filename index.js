@@ -1,11 +1,25 @@
 const express = require('express')
 const cors = require('cors')
+const mongoose = require('mongoose')
+
+require('dotenv').config()
+const PORT = 4444
 
 const app = express()
 
 app.use(cors)
 app.use(express.json())
 
+const route = require("./routes/ShortenerRoute")
 
+app.use("", route)
 
-app.listen(process.env.PORT || 4444, () => { console.log("Server Up and Running") })
+mongoose
+    .connect(process.env.MONGO_URI, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+    })
+    .then(() => console.log("Connected To Database"))
+    .catch(e => console.log(e.message))
+
+app.listen(PORT, () => { console.log(`Server Up and Running ${PORT}`) })
