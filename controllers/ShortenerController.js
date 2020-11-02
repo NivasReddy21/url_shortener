@@ -1,5 +1,4 @@
-const validator = require('validator');
-
+const validator = require('validator')
 const Url = require('../models/Url')
 
 const Redirect = async(req, res) => {
@@ -22,7 +21,7 @@ const AddUrl = async(req, res) => {
 
     if (!url) return res.status(400).json({ msg: "No Url Provided" })
 
-    if (!validator.isUrl(url, { require_protocol: true, })) return res.status(400).json({ msg: "Invalid Url" })
+    if (!validator.isURL(url, { require_protocol: true, })) return res.status(400).json({ msg: "Invalid Url" })
 
     try {
         let URL = await Url.findOne({ url })
