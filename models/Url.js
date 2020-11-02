@@ -6,3 +6,5 @@ const urlSchema = mongoose.Schema({
     shortUrl: String,
     clicks: Number,
 })
+
+module.exports = mongoose.model("url", schema);
