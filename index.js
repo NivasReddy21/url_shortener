@@ -11,6 +11,7 @@ const app = express()
 const upload = multer();
 
 app.set('view engine', 'pug')
+app.use(express.static("./public"))
 
 app.use(cors())
 app.use(bodyParser.json())

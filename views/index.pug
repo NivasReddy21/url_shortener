@@ -1,11 +1,16 @@
 extends default
-
+  
+  
 block content
-    form(action='/', method='POST')
-      .form-group
-        label(for='exampleInputEmail1') Enter Your URL
-        input#exampleInputEmail1.form-control(type='text' name='url' aria-describedby='emailHelp')
-      button.btn.btn-primary(type='submit') Submit
-      br
-      br
-      p ShortUrl: #{ shorturl }
+
+  form(action='/', method="POST")
+    label#icon(for='name')
+      i.fa.fa-link
+    input#name(type='text' name='url' placeholder='https://www.example.com' required)
+    hr
+    .btn-block
+      button(type='submit') Submit
+    
+    if(shorturl)
+      hr
+      h2 Short Url: #{ shorturl }
