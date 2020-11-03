@@ -1,0 +1,10 @@
+extends default
+
+block content
+    form(action='/', method='POST')
+      p
+        | Url: 
+        input(name='url', value='', type='text')
+      input(value='Submit', type='submit')
+      p ShortUrl: #{ shorturl }
+        

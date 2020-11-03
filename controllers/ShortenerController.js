@@ -5,7 +5,7 @@ const shortid = require("shortid");
 const Redirect = async(req, res) => {
     const { shortId } = req.params
 
-    if (!shortId) return res.status(400).json({ msg: "No Id Found" })
+    if (!shortId) return res.status(400).json({ msg: "No Id Provided" })
 
     try {
         const URL = await Url.findOne({ shortId })
@@ -19,8 +19,7 @@ const Redirect = async(req, res) => {
 
 const AddUrl = async(req, res) => {
     const { url } = req.body
-    const shortId = shortid.generate()
-    const shortUrl = "localhost:8080/" + shortId
+
 
     if (!url) return res.status(400).json({ msg: "No Url Provided" })
 
@@ -29,11 +28,13 @@ const AddUrl = async(req, res) => {
     try {
         let URL = await Url.findOne({ url })
         if (!URL) {
+            const shortId = shortid.generate()
+            const shortUrl = "localhost:8080/" + shortId
             let newUrl = new Url({ url, shortUrl, shortId })
             await newUrl.save();
-            return res.status(201).json({ shortId: newUrl.shortId, shortUrl })
+            return res.render('index', { shorturl: shortUrl, title: "shorturl" })
         }
-        return res.status(201).json({ shortId: URL.shortId, url: URL.shortUrl })
+        return res.status(201).render('index', { shorturl: URL.shortUrl, title: "shorturl" })
     } catch (e) {
         console.log(e)
         return res.status(400).json({ msg: "Internal Server Error" })
@@ -41,7 +42,12 @@ const AddUrl = async(req, res) => {
 
 }
 
+const RenderHome = (req, res) => {
+    res.render('index', { title: "Homepage" })
+}
+
 module.exports = {
     Redirect,
     AddUrl,
+    RenderHome,
 };

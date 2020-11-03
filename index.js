@@ -1,14 +1,22 @@
 const express = require('express')
 const cors = require('cors')
 const mongoose = require('mongoose')
+var multer = require('multer');
+var bodyParser = require('body-parser');
 
 require('dotenv').config()
 const PORT = 8080
 
 const app = express()
+const upload = multer();
+
+app.set('view engine', 'pug')
 
 app.use(cors())
-app.use(express.json())
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true }))
+app.use(upload.array())
+
 
 const route = require("./routes/ShortenerRoute")
 
