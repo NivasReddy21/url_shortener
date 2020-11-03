@@ -2,9 +2,10 @@ extends default
 
 block content
     form(action='/', method='POST')
-      p
-        | Url: 
-        input(name='url', value='', type='text')
-      input(value='Submit', type='submit')
+      .form-group
+        label(for='exampleInputEmail1') Enter Your URL
+        input#exampleInputEmail1.form-control(type='text' name='url' aria-describedby='emailHelp')
+      button.btn.btn-primary(type='submit') Submit
+      br
+      br
       p ShortUrl: #{ shorturl }
-        

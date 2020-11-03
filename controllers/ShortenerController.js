@@ -32,9 +32,9 @@ const AddUrl = async(req, res) => {
             const shortUrl = "localhost:8080/" + shortId
             let newUrl = new Url({ url, shortUrl, shortId })
             await newUrl.save();
-            return res.render('index', { shorturl: shortUrl, title: "shorturl" })
+            return res.render('index', { shorturl: shortUrl })
         }
-        return res.status(201).render('index', { shorturl: URL.shortUrl, title: "shorturl" })
+        return res.status(201).render('index', { shorturl: URL.shortUrl })
     } catch (e) {
         console.log(e)
         return res.status(400).json({ msg: "Internal Server Error" })
